@@ -1,0 +1,12 @@
+import { networkInterfaces } from 'node:os';
+import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { ensureConfig } from './server.mjs';
+const config = ensureConfig();
+const candidates = Object.entries(networkInterfaces()).flatMap(([name, values]) => (values ?? []).map(value => ({ ...value, name }))).filter(value => value.family === 'IPv4' && !value.internal && /^(192\.168\.|10\.|172\.(1[6-9]|2\d|3[01])\.)/.test(value.address));
+const ip = candidates.find(value => value.name === 'en0')?.address ?? candidates[0]?.address;
+if (!ip) throw new Error('Connect this Mac to Wi-Fi, then run pairing again.');
+const path = new URL('../.env.local', import.meta.url);
+const original = existsSync(path) ? readFileSync(path, 'utf8') : '';
+const keep = original.split('\n').filter(line => !line.startsWith('EXPO_PUBLIC_COACH_URL=') && !line.startsWith('EXPO_PUBLIC_COACH_TOKEN=')).join('\n').trim();
+writeFileSync(path, `${keep}\nEXPO_PUBLIC_COACH_URL=http://${ip}:8787\nEXPO_PUBLIC_COACH_TOKEN=${config.token}\n`, { mode: 0o600 });
+console.log('Paired this private development app with the Mac coach server. Restart Expo to load the connection.');

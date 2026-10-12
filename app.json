@@ -1,0 +1,62 @@
+{
+  "expo": {
+    "name": "Malka",
+    "slug": "malka",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/brand/crown-full-bleed.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.anevie.malka"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#E5F0FA",
+        "foregroundImage": "./assets/brand/crown-full-bleed.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/brand/crown-full-bleed.png",
+      "bundler": "metro",
+      "output": "single"
+    },
+    "plugins": [
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow Malka to show the camera behind your reference photo.",
+          "recordAudioAndroid": false,
+          "barcodeScannerEnabled": false
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Allow Malka to use a selected photo as your local reference.",
+          "microphonePermission": false
+        }
+      ],
+      [
+        "expo-media-library",
+        {
+          "savePhotosPermission": "Allow Malka to save the photos you take to your photo library.",
+          "photosPermission": "Allow Malka to access your photos.",
+          "granularPermissions": [
+            "photo"
+          ]
+        }
+      ],
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#E5F0FA",
+          "image": "./assets/brand/malka-transparent.png",
+          "imageWidth": 300,
+          "resizeMode": "contain"
+        }
+      ]
+    ]
+  }
+}
