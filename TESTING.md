@@ -86,6 +86,21 @@ These are planned, not passed:
 
 `npm test` runs 14 existing tests covering composition advice, reduced analysis-image geometry and optional coach-server authentication/input/error handling. These modules are supporting or experimental code. Passing them does not prove live camera, saving, gesture or offline behavior. Type checking, lint and a successful export are also insufficient to establish full device compatibility — BUG-002 is an example.
 
+## First Playwright browser test — 13 October 2026
+
+- File: `e2e/gallery.spec.ts`; desktop Chromium, fresh local production web export.
+- Scenario: open My photos → verify empty message → verify Download selected (0) is disabled → return Home → verify Choose reference photo is visible.
+- Result: **1 passed**, run with AI assistance on the creator's Mac. The web build also completed. The initial setup attempt ran before the Chromium download completed; rerunning after installation passed.
+- Creator's own run and learning exercise: **pending**.
+- Scope excludes camera capture, touch gestures, saving and mobile Safari.
+- Run `npm run test:e2e`; see [the beginner guide](PLAYWRIGHT-GUIDE.md) for a visible browser run and an assertion exercise.
+
 ## Dependency review
 
 The recovery audit reported 28 affected packages (20 high, 8 moderate) in the recovered SDK dependency tree, including transitive braces, node-forge and uuid advisories. The suggested automated fix involved an incompatible Expo downgrade and was not applied. This prototype has not undergone a comprehensive security audit.
+
+## Reference movement regression test — 13 October 2026
+
+`e2e/reference.spec.ts` selects a synthetic reference image and uses Chromium's fake camera. It verifies mouse dragging changes the reference bounds by the expected amount, simulated two-finger touch pinching increases its size, the size control works, and Reset restores the original bounds. After dragging and resizing, it checks that window scroll position, visual viewport scale and camera editing-surface bounds remain unchanged.
+
+**Result:** Pass with AI assistance; both Playwright tests passed together. This is a local Chromium regression test, not a real iPhone/Safari acceptance test or camera-quality test. Real touch cancellation, mobile Safari page gestures and device camera behavior remain manual checks.

@@ -47,7 +47,7 @@ export function ReferenceOverlay({ uri, adjusting, transform, onChange, onError 
     rebase();
   };
   return <View pointerEvents="box-none" style={StyleSheet.absoluteFill}>
-    <View pointerEvents="none" style={[StyleSheet.absoluteFill, { transform: [{ translateX: transform.x }, { translateY: transform.y }, { scale: transform.scale }] }]}>
+    <View testID="reference-photo" pointerEvents="none" style={[StyleSheet.absoluteFill, { transform: [{ translateX: transform.x }, { translateY: transform.y }, { scale: transform.scale }] }]}>
       <Image source={{ uri }} resizeMode="contain" style={[StyleSheet.absoluteFill, { opacity: .4 }]} onError={onError} />
     </View>
     {adjusting && <div ref={surface} aria-label="Drag reference with one finger or pinch with two fingers to resize"

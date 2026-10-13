@@ -34,12 +34,13 @@ MALKA is a prototype, not a finished production camera app.
 - Web and iOS JavaScript bundles export successfully.
 - TypeScript and lint checks pass.
 - 14 automated tests pass, covering supporting image geometry, composition advice and coach-server behavior.
-- The web home screen and empty-gallery navigation were checked in a browser.
+- Two Playwright tests pass in desktop Chromium, checking empty-gallery navigation and reference movement/resizing without page scrolling or zooming. Initial setup and verification used AI assistance.
+- The web home screen and empty-gallery navigation were also checked manually in a browser.
 - Manual testing on iPhone identified a web gesture bug: dragging or pinching the reference moved or zoomed the page. After a web-specific fix was deployed, the creator confirmed the gestures worked.
 - The creator reports better camera quality in the native app than the web version. No measured comparison against Apple Camera has been completed.
 - The existing automated tests do not verify camera capture, saving or touch gestures.
 
-See the [testing report](TESTING.md) for test details, dependency advisories and the device-testing checklist.
+See the [QA portfolio report](docs/QA-REPORT.md), [downloadable HTML report](docs/MALKA-HTML-report.zip), and [testing report](TESTING.md) for test details, dependency advisories and the device-testing checklist.
 
 ## Run locally
 
@@ -64,6 +65,10 @@ npm run preview:web
 ```
 
 See the [setup guide](SETUP.md) for deployment instructions and platform differences.
+
+## Browser test learning
+
+Run `npm run test:e2e -- --headed` to watch the first Playwright gallery test. See [PLAYWRIGHT-GUIDE.md](PLAYWRIGHT-GUIDE.md) for instructions and a beginner exercise. The test runs against a fresh local web build.
 
 ## Known limitations
 
